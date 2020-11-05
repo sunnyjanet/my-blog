@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     getInfo () {
-      axios.get('api/blogContent.json').then(res => {
+      axios.get('mock/blogContent.json').then(res => {
         res = res.data
         if (res.ret && res.data) {
           const data = res.data

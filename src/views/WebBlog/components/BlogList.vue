@@ -55,7 +55,7 @@ export default {
       this.getDataInfo()
     },
     getDataInfo () {
-      axios.get('api/blogCard.json').then(res => {
+      axios.get('mock/blogCard.json').then(res => {
         res = res.data
         if (res.ret && res.data) {
           const data = res.data
