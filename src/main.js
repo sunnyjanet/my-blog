@@ -6,6 +6,7 @@ import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/styles/reset.css'
 import VueScrollReveal from 'vue-scroll-reveal'
+import LoadScript from 'vue-plugin-load-script'
 
 Vue.config.productionTip = false
 Vue.use(Element, { size: 'small', zIndex: 3000 })
@@ -17,6 +18,7 @@ Vue.use(VueScrollReveal, {
   mobile: false,
   origin: 'right'
 })
+Vue.use(LoadScript)
 
 new Vue({
   router,
