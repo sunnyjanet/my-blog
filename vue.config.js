@@ -4,6 +4,7 @@ function resolve (dir) {
 }
 
 module.exports = {
+  publicPath: './',
   configureWebpack: {
     resolve: {
       alias: {
@@ -13,10 +14,10 @@ module.exports = {
   },
   devServer: {
     proxy: {
-      '/api': {
+      '/mock': {
         target: 'http://localhost:8080',
         pathRewrite: {
-          '^/api': '/mock'
+          '^/mock': '/mock'
         }
       }
     }
