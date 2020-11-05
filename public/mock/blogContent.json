@@ -1,0 +1,288 @@
+{
+  "ret": true,
+  "data": {
+    "blogContentList": [{
+      "id": 0,
+      "textList": [{
+        "className": "head-title",
+        "textInfo": "var、let和const的区别"
+      },{
+        "className": "first-level-title",
+        "textInfo": "一、let和var"
+      },{
+        "className": "second-level-title",
+        "textInfo": "1、ES6新增了let命令，用于声明变量，用法类似于var。但是所声明的变量只在let命令所在的代码块内有效。例如："
+      },{
+        "className": "normal-text",
+        "textInfo": "上面的代码在代码块内可以成功调用a、b两个变量。<br>在代码块外面调用var声明的变量b则很正常，调用let声明的变量a会报错。"
+      },{
+        "className": "second-level-title",
+        "textInfo": "2、For循环的计数器很适合使用let命令"
+      },{
+        "className": "normal-text",
+        "textInfo": "当前的计数器i只在本轮for循环体内有效，每次循环的i其实都是一个新的变量（每次循环体都是一个新的块级作用域），存放每个i的内存是不同的地方。例如："
+      },{
+        "className": "normal-text",
+        "textInfo": "上面代码中调用a[6]()时，console.log(i)中的i的值是多少呢？这个变量i是i=6时所在的for循环体中对应的变量i，很显然，i的值就是6。因此打印出来的是6。<br>如果用var来声明，则效果完全不同，例如："
+      },{
+        "className": "normal-text",
+        "textInfo": "上面代码中变量i是var声明的，在全局范围内有效。每一轮循环中的i是同一个变量，也即所占的内存是同一个地方，新值会覆盖旧值。调用a[6]()时， i的值是最新一轮循环的i值，等于10。因此打印出来的是10。"
+      },{
+        "className": "second-level-title",
+        "textInfo": "3、let不存在变量提升"
+      },{
+        "className": "normal-text",
+        "textInfo": "var声明的变量可以先使用后声明，也即“变量提升”。<br>let不存在变量提升，变量一定要先声明后使用，否则报错。"
+      },{
+        "className": "second-level-title",
+        "textInfo": "4、暂时性死区"
+      },{
+        "className": "normal-text",
+        "textInfo": "在代码块内，使用let命令声明的变量会形成封闭作用域。变量在声明之前，都是不可用的，会报错。这在语法上成为“暂时性死区”。<br>ES6新增的let的暂时性死区以及不存在变量提升，主要是为了减少运行时的错误，防止在变量声明前就使用这个变量，导致意料之外的行为。"
+      },{
+        "className": "second-level-title",
+        "textInfo": "5、let不允许在相同作用域内重复声明同一个变量"
+      },{
+        "className": "second-level-title",
+        "textInfo": "6、为什么需要块级作用域"
+      },{
+        "className": "normal-text",
+        "textInfo": "如果没有块状作用域，也即不用let，而是用var，会带来很多不合理的场景。比如：<br>（1）由于变量提升，代码块内层的变量可能会覆盖外层变量"
+      },{
+        "className": "normal-text",
+        "textInfo": "（2）用来for循环计数的循环变量i只是用来控制循环的，但是如果用var声明i，循环结束后，它并不会消失，而是泄露为全局变量。"
+      },{
+        "className": "first-level-title",
+        "textInfo": "二、const"
+      },{
+        "className": "normal-text",
+        "textInfo": "Const用来声明常量，一旦声明，其值不能改变，否则会报错。这意味着，const必须在声明常量的同时直接初始化，否则会报错，因为后续不能赋值（改变值）。<br>const与let命令的相同点:<br>（1）const声明的常量只在声明所在的块级作用域内有效<br>（2）const声明的常量同样存在暂时性死区，声明的常量同样也不提升，只能在声明后使用。<br>（3）与let一样，const也不可重复声明常量。"
+      }] 
+    },{
+      "id": 1,
+      "textList": [{
+        "className": "head-title",
+        "textInfo": "Promise解决回调地狱问题"
+      },{
+        "className": "first-level-title",
+        "textInfo": "一、Promise是什么?"
+      },{
+        "className": "normal-text",
+        "textInfo": "所谓的Promise，就是一个对象，用来传递异步操作的消息。Promise对象代表一个异步操作，它有3种状态：pending（进行中）、Resolved（已完成，也称Fulfilled）和Rejected（已失败）。一旦状态变更了以后，就不能再更改状态了。<br>Promise是一个构造函数，用来生成Promise实例，构造函数内部的代码是立即执行的。如下方代码所示："
+      },{
+        "className": "normal-text",
+        "textInfo": "Promise构造函数接受一个函数作为参数，该函数的两个参数分别是resolve和reject。<br>（1）resolve函数：将Promise对象的状态从“pending（进行中）”变成“Resolved（已完成）”。在异步操作成功时调用resolve函数，并将异步操作的相关结果作为参数传递出去。比如上面代码resolve(value）中的value，就是传递出去的参数。<br>（2）reject函数：将Promise对象的状态从“pending（进行中）”变成“Rejected（已失败）”。在异步操作失败时调用reject函数，并将异步操作报出的错误（通常是Error对象的实例）作为参数传递出去。比如上面代码reject(error)中的error，就是传递出去的参数。<br>Promise实例生成之后，可以用then方法分别指定Resolved状态和Rejected状态的回调函数。then方法接受两个回调函数作为参数：第一个回调函数必选，在Promise对象的状态变Resolved时调用，第二个回调函数可选，在状态变为Rejected时调用。这两个回调函数都接受Promise对象传出的值作为参数（也即上面代码Promise对象返回的的value是then方法中第一个回调函数的实参，上面代码Promise对象返回的error是then方法中第二个回调函数的实参）。"
+      },{
+        "className": "first-level-title",
+        "textInfo": "二、用promise解决回调地狱问题"
+      },{
+        "className": "second-level-title",
+        "textInfo": "1、什么叫回调函数"
+      },{
+        "className": "normal-text",
+        "textInfo": "被作为实参传入另一函数，并在该外部函数内被调用，用以来完成某些任务的函数，称为回调函数。<br>（1）同步回调：回调函数立即执行。例如："
+      },{
+        "className": "normal-text",
+        "textInfo": "上方代码中的回调函数greeting是立即执行的<br>（2）异步回调：须等某个异步操作完成后，才执行回调函数。例如："
+      },{
+        "className": "normal-text",
+        "textInfo": "回调函数会引起回调地狱（callback hell）问题，也叫“末日金字塔”。"
+      },{
+        "className": "second-level-title",
+        "textInfo": "2、什么叫回调地狱"
+      },{
+        "className": "normal-text",
+        "textInfo": "回调的本质是将回调函数作为参数传递给另一个函数，当处理比较复杂的需求时，回调函数作为参数一层层嵌套，代码结构会非常庞大臃肿，代码维护难度极高，这就叫回调地狱。例如："
+      },{
+        "className": "second-level-title",
+        "textInfo": "3、promise如何解决回调地狱问题？"
+      },{
+        "className": "second-level-title",
+        "textInfo": "（1）Promise实现了链式调用，代码更优雅，可读性更高"
+      },{
+        "className": "normal-text",
+        "textInfo": "promise的then方法有返回值，且返回值依然是一个promise对象，且是一个全新的 promise实例。这样，我们就可以在then方法返回的promise对象后面链式地继续then。后面的then里面回调函数的参数就是上一个then里面return的内容。因为return 的value值会被包装成Promise.reslove(value) 。<br>采用链式的then可以指定一组按照次序调用的回调函数。第一个then方法指定的回调函数有可能返回的还是一个Promise对象（即有异步操作），这时，第二个then方法指定的回调函数就会等待这个Promise对象状态发生变化，再被调用。如果变为Resolved，就调用resolve函数；如果状态变为Rejected，就调用reject函数。<br>例如在公司某个事务需老板审批通过后，经理才能审批，则代码可以这样模拟：多个then链式地调用下去，解决了回调地狱的那种复杂的多层嵌套。"
+      },{
+        "className": "second-level-title",
+        "textInfo": "（2）错误处理要好得多，所有错误都由块末尾的一个.catch块处理，而不是在“金字塔”的每一层单独处理。"
+      },{
+        "className": "normal-text",
+        "textInfo": "范例：见上图代码块末尾的catch处理"
+      },{
+        "className": "second-level-title",
+        "textInfo": "（3）Promise.all实现了多个异步任务并发运行并为其结果创建承诺的功能"
+      },{
+        "className": "normal-text",
+        "textInfo": "Promise.all(iterable) 方法返回一个 Promise 实例，此实例在 iterable 参数内所有的 promise 都“完成（resolved）”或参数中不包含 promise 时回调完成（resolve）；如果参数中  promise 有一个失败（rejected），此实例回调失败（reject），失败的原因是第一个失败 promise 的结果。"
+      },{
+        "className": "second-level-title",
+        "textInfo": "注意："
+      },{
+        "className": "normal-text",
+        "textInfo": "a. 在任何情况下，Promise.all 返回的 promise 的完成状态的结果都是一个数组，它包含所有的传入迭代参数对象的值（也包括非 promise 值）。<br>b.如果参数中包含非 promise 值，这些值将被忽略，但仍然会被放在返回数组中（如果 promise 完成的话）。例如："
+      },{
+        "className": "normal-text",
+        "textInfo": "只有p1、p2、p3都resolved，才会执行最后的then方法。"
+      }] 
+    },{
+      "id": 2,
+      "textList": [{
+        "className": "head-title",
+        "textInfo": "CSS实现水平居中的2个方法"
+      },{
+        "className": "second-level-title",
+        "textInfo": "1、margin: 0 auto"
+      },{
+        "className": "normal-text",
+        "textInfo": "（1）只能对块级元素生效，使块级元素居中<br>（2）需要给定要居中的块级元素的宽度<br>（3）如果要对内联元素使用该方式，需设置display:block；然后再给定这个元素的宽度即可。<br>注意：不能通过设置padding：0 auto来实现居中，padding设为auto等同于padding为0。<br>"
+      },{
+        "className": "second-level-title",
+        "textInfo": "2、text-align：center<br>"
+      },{
+        "className": "normal-text",
+        "textInfo": "（1）对块级元素设置 text-align：center，可以实现盒子中内联子元素（如文本、图片）居中。<br>（2）如果子元素是块元素，将子元素设为display: inline-block即可。<br>"
+      }] 
+    },{
+      "id": 3,
+      "textList": [{
+        "className": "head-title",
+        "textInfo": "CSS实现垂直居中的7个方法"
+      },{
+        "className": "second-level-title",
+        "textInfo": "1、使用absoute绝对定位和transform"
+      },{
+        "className": "normal-text",
+        "textInfo": "top:50% 将child元素相对于父元素偏移50%的高度<br>transform: translate(0, -50%) translate偏移的百分比是相对于元素自身的尺寸而言的，也即这行代码会将child元素向上偏移50%的自身高度。<br>这样一来，child元素就实现了垂直居中。"
+      },{
+        "className": "second-level-title",
+        "textInfo": "2、使用absoute绝对定位和负margin外边距值"
+      },{
+        "className": "normal-text",
+        "textInfo": "原理和方法1类似，先将child元素相对于父元素偏移50%的高度，再用margin将child元素向上偏移自身高度的一半。但是，这个方法需知道child元素自身的高度。其实也很简单，在需求场景允许的情况下，直接给子元素指定一个高度即可。"
+      },{
+        "className": "second-level-title",
+        "textInfo": "3、绝对定位和margin：auto"
+      },{
+        "className": "normal-text",
+        "textInfo": "这种实现方式的两个核心是：把要垂直居中的元素相对于父元素绝对定位，top和bottom设为相等的值，再将要居中元素设置为 margin:auto，即可实现垂直居中。被居中元素的宽高也可以不设置，但不设置的话就必须是图片这种自身就包含尺寸的元素，否则无法实现。<br>发散一下，如果想实现同时水平+垂直居中就可以这样实现："
+      },{
+        "className": "second-level-title",
+        "textInfo": "4、使用padding实现子元素的垂直居中"
+      },{
+        "className": "normal-text",
+        "textInfo": "这种方式非常方便，这时候父元素是不能设置高度的，要让它自动被填充起来。除非设置了一个正好等于上内边距+子元素高度+下内边距的值，否则无法精确垂直居中。"
+      },{
+        "className": "second-level-title",
+        "textInfo": "5、使用flex布局"
+      },{
+        "className": "normal-text",
+        "textInfo": "display: flex; <br>align-items: center;<br>对元素设置 display:flex; 将其指定为 flex 布局的容器，指定好了容器之后设置 align-items：center；指定容器里的项目在交叉轴上的居中对齐。  <br>这种方式既可以对内联的项目适用，也对块级的项目适用。例如，下方代码中，innerBox和outterBox都设置了display: flex; align-items: center;。因此innerBox相对outterBox垂直居中，innerBox里的内联文本相对outterBox也居中。"
+      },{
+        "className": "second-level-title",
+        "textInfo": "7、使用line-height、height对单行文本垂直居中"
+      },{
+        "className": "normal-text",
+        "textInfo": "设置line-height=height可以实现单行文本的垂直居中"
+      }] 
+    },{
+      "id": 4,
+      "textList": [{
+        "className": "head-title",
+        "textInfo": "relative与absolute的定位节点的区别"
+      },{
+        "className": "second-level-title",
+        "textInfo": "1、relative定位"
+      },{
+        "className": "normal-text",
+        "textInfo": "relative定位将元素偏离其默认位置，<span style='color:#be3d34'>并没有脱离普通流，只是视觉上发生偏移</span>（这点我曾经踩过坑）。这里所说的默认位置是在父级节点的<span style='color:#be3d34'>content-box</span>区定位，父级有文字的话，元素的默认位置则是紧随文字。<br>relative定位的元素的top（bottom）、left（right）是相对于父级节点的<span style='color:#be3d34'>content-box</span>区定位进行偏移。当top（bottom）、left（right）是百分比时，对应的是相对于父级节点的<span style='color:#be3d34'>content-box</span>的width、height。"
+      },{
+        "className": "second-level-title",
+        "textInfo": "2、absolute定位"
+      },{
+        "className": "normal-text",
+        "textInfo": "absolute定位的元素将脱离文档流，进行浮动。具体如何浮动分下面两种情况："
+      },{
+        "className": "second-level-title",
+        "textInfo": "（1）如果没有设置top right bottom left值"
+      },{
+        "className": "normal-text",
+        "textInfo": "则浮动在父级节点的<span style='color:#be3d34'>content-box</span>区"
+      },{
+        "className": "second-level-title",
+        "textInfo": "（2）如果设置了top right bottom left值"
+      },{
+        "className": "normal-text",
+        "textInfo": "absolute是相对最近的非 static 定位的父（祖先）节点的<span style='color:#be3d34'>padding-box</span>区进行定位，祖先节点有文字的话，忽略文字。如果找不到符合条件的父（祖先）节点，则相对浏览器窗口进行定位。<br>absolute定位的元素的top（bottom）、left（right）是相对于上述节点的<span style='color:#be3d34'>padding-box</span>区定位进行偏移，当top（bottom）、left（right）是百分比时，对应的是相对于父级节点的<span style='color:#be3d34'>padding-box</span>的width、height。"
+      }] 
+    },{
+      "id": 5,
+      "textList": [{
+        "className": "head-title",
+        "textInfo": "webpack实战详解"
+      },{
+        "className": "normal-text",
+        "textInfo": "在vue项目中，webpack项目打包已经成为主流。接下来以自己的实际项目为例，初步介绍一下webpack打包的流程。"
+      },{
+        "className": "first-level-title",
+        "textInfo": "一、webpack的作用"
+      },{
+        "className": "normal-text",
+        "textInfo": "1、目前，组件化、碎片化开发已成为默认的项目开发模式，我们如何进行组件化开发？答案是将可复用的功能块写成单独的component，需要时直接引用就好。在VUE中，组件全局注册的写法是Vue.component(),于是项目中就有了这样的JS文件："
+      },{
+        "className": "normal-text",
+        "textInfo": "如上图，这样的组件显然是让人无法接受的。为此人们发明了单文件组件.vue文件(用法这里不展开)，可是，这个文件我怎么打开呢?"
+      },{
+        "className": "normal-text",
+        "textInfo": "2、css书写繁琐性随着项目越来越大也是令人头疼的问题，less等css框架语言的出现使得这种情况得到改善，可是，我直接加载less怎么让浏览器识别呢？"
+      },{
+        "className": "normal-text",
+        "textInfo": "3、几年前，模块化兴起的时候，require.js、sea.js成为导入模块主流，但是随着ES6的兴起，import方式以简便、原生、易上手的特性，已经基本取代了这两个框架，然而，我怎么让不支持ES6的语言能识别import(ES6转ES5)呢?"
+      },{
+        "className": "normal-text",
+        "textInfo": "4、碎片化的开发带来的弊端就是我们要不断的分解、聚合松散模块，这就意味着我们可能要拼接很多小积木--图片、js等很多文件，而浏览器加载一个文件的成本，是项目中比较高的，加载很多文件势必会拖累系统性能。如果我们能一次性加载一整块积木，那是极好的，可是这怎么实现呢?"
+      },{
+        "className": "normal-text",
+        "textInfo": "以上的几个痛点，webpack都能解决。这就是webpack的作用！"
+      },{
+        "className": "first-level-title",
+        "textInfo": "二、如何使用webpack "
+      },{
+        "className": "normal-text",
+        "textInfo": "webpack是基于node的，怎么安装webpack和node这里不展开，只介绍怎么使用。<br>下图中标红的就是webpack配置的四大主体配置项:"
+      },{
+        "className": "second-level-title",
+        "textInfo": "1、entry"
+      },{
+        "className": "normal-text",
+        "textInfo": "前面介绍到很多小积木的问题，我们想把小积木聚合成大积木，但是，必须先有了第一块积木，才能拼接第二块积木，第三、第四....那么，第一块积木是什么呢，就是entry配置的main文件。<br>entry.main：是入口文件（第一块积木），接下来webpack就可以把所有和main.js有关的所有积木都打包成一整块!<br>entry.vendors：是打包第三方框架或者库的配置，用于和业务逻辑分离。也可以避免打包文件过大。"
+      },{
+        "className": "second-level-title",
+        "textInfo": "2、output"
+      },{
+        "className": "normal-text",
+        "textInfo": "积木拼接好了之后，我们怎么拿到这个积木去使用它呢？显然就是用src引用它，这样就得知道这块积木放到哪里了，output就是打包好的js文件的路径等配置项。 <br>output.path：打包文件输出路径<br>puiblicpath：我们定义的用于引入文件的路径<br>filename：就是打包后的文件名[name]就是和entry的入口文件名main<br>chunkFIlename：可以把打包文件切割防止打包文件过大，初学者可暂时忽略这个配置。<br>见下图："
+      },{
+        "className": "normal-text",
+        "textInfo": "entry里面的vendors打包完就是vendors.js文件，main.js打包完就是main.bundle.js文件。<br>见下图："
+      },{
+        "className": "normal-text",
+        "textInfo": "vendors.js、main.bundle.js文件都生成在path配置的dist目录下，我们也可以通过配置的publicpath来访问它们。"
+      },{
+        "className": "second-level-title",
+        "textInfo": "3、module"
+      },{
+        "className": "normal-text",
+        "textInfo": "前面我们说过，像vue文件、ES6语言、 less语言怎么才能让浏览器识别呢，这就是module做的工作。我们可以配置不同的工具给webpack让它拿着这些钳子扳手把文件重新改变下，让浏览器可识别，当然。怎么改就不是我们要关心的了，但是我们要告诉webpack哪些工具处理哪些不能识别的文件。"
+      },{
+        "className": "second-level-title",
+        "textInfo": "4、plugins"
+      },{
+        "className": "normal-text",
+        "textInfo": "这个是辅助webpack的一个配置项，用来优化webpack的一些打包结果。"
+      },{
+        "className": "normal-text",
+        "textInfo": "到这里，基本的webpack功能和使用就介绍完了，详细的可以查看webpack官方文档。"
+      }] 
+    }]
+  }
+}
