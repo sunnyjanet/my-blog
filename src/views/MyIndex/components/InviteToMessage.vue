@@ -1,6 +1,6 @@
 <template>
   <div class="InviteToMessage">
-    <div class="wrapper" v-scroll-reveal.reset>
+    <div class="wrapper" v-scroll-reveal.reset="{opacity: 1}">
       <p class="invite-title">欢迎志同道合的朋友给我留言</p>
       <p class="msg-example">
         <span>畅所欲言...如何自学转前端？</span><br>
