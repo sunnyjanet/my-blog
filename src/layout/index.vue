@@ -56,7 +56,6 @@ export default {
           console.error(err)
         }
       })
-      this.$store.commit('switchActiveMenuIndex', index)
     }
   }
 }
