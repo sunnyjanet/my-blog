@@ -14,7 +14,9 @@
       </el-menu>
     </div>
     <div class="appMain">
-      <router-view />
+      <keep-alive>
+        <router-view />
+      </keep-alive>
     </div>
   </div>
 </template>

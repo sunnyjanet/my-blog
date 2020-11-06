@@ -2,7 +2,9 @@
   <div class="WebBlog">
     <div class="blog-outter-wrapper">
       <div class="blog-inner-wrapper">
-        <router-view />
+        <keep-alive>
+          <router-view />
+        </keep-alive>
       </div>
     </div>
   </div>

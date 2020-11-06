@@ -36,7 +36,7 @@ export default {
         })
     },
     forceDeleteAdvertisement () {
-      // 每500ms轮询一次 直接把dom删掉 css再厉害 再important也没用 元素都没饿了
+      // 每500ms轮询一次 如果有广告对应的dom 直接把dom删掉 css再厉害 再important也没用 元素都没饿了
       setInterval(() => {
         // 选择class要加.
         if ($('.section-service-w')) {
@@ -66,8 +66,8 @@ export default {
       line-height: 35px
       text-align: center
     .blog-detail
-      position: relative;
-      width: 622px;
+      position: relative
+      width: 622px
       background: #ffffff
       border-radius: 15px
       padding: 20px
