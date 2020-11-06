@@ -1,34 +1,39 @@
 <template>
   <div class="MyResume">
-    <div class="resume-title">
-      我的简历
-    </div>
-    <div class="resume-slogan" v-scroll-reveal.reset="{origin: 'bottom'}">
-      <div class="slogan-item" v-for="(item, index) in sloganData" :key="index">
-        <div class="inner-wrapper">
-          <img class="slogan-img" :src="item.sloganImgUrl" />
-          <p class="slogan-title" v-html="item.sloganTitle"></p>
-          <p class="slogan-content" v-html="item.sloganContent"></p>
+    <template v-if="canShowResume">
+      <div class="resume-title">
+        我的简历
+      </div>
+      <div class="resume-slogan" v-scroll-reveal.reset="{origin: 'bottom'}">
+        <div class="slogan-item" v-for="(item, index) in sloganData" :key="index">
+          <div class="inner-wrapper">
+            <img class="slogan-img" :src="item.sloganImgUrl" />
+            <p class="slogan-title" v-html="item.sloganTitle"></p>
+            <p class="slogan-content" v-html="item.sloganContent"></p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="resume-main">
-      <ul class=resume-list>
-        <li class="resume-item" v-scroll-reveal.reset v-for="(item, index) in resumeData" :key="index">
-          <div class="work-time">
-            <p class="work-month">{{item.workMonth}}</p>
-            <p class="work-year">{{item.workYear}}</p>
-          </div>
-          <div class="work-experience">
-            <p class="company">{{item.company}}</p>
-            <div class="work-intro">
-              <img class="company-img" :src="item.logoUrl"/>
-              <p class="job-descrip" v-html="item.jobDescrip"></p>
+      <div class="resume-main">
+        <ul class=resume-list>
+          <li class="resume-item" v-scroll-reveal.reset v-for="(item, index) in resumeData" :key="index">
+            <div class="work-time">
+              <p class="work-month">{{item.workMonth}}</p>
+              <p class="work-year">{{item.workYear}}</p>
             </div>
-          </div>
-        </li>
-      </ul>
-    </div>
+            <div class="work-experience">
+              <p class="company">{{item.company}}</p>
+              <div class="work-intro">
+                <img class="company-img" :src="item.logoUrl"/>
+                <p class="job-descrip" v-html="item.jobDescrip"></p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </template>
+    <template v-else>
+
+    </template>
   </div>
 </template>
 
@@ -37,6 +42,7 @@ export default {
   name: 'MyResume',
   data () {
     return {
+      canShowResume: false,
       sloganData: [
         {
           sloganImgUrl: require('../../assets/img/books.jpg'), // 通过require方法 可以将编译前的文件路径，在打包的时候生成一个正确的打包后的路径
@@ -78,6 +84,31 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    openPasswordModal () {
+      this.$prompt('请输入密码', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消'
+      }).then(({ value }) => {
+        if (value === 'sunnyJanet') {
+          this.canShowResume = true
+        } else {
+          this.$message({
+            type: 'info',
+            message: '密码输入不正确，请重新输入'
+          })
+          this.openPasswordModal()
+        }
+      }).catch(() => {
+        this.$alert('<strong>您已取消输入密码，无法查看简历。请刷新后输入密码查看。</strong>', '提示', {
+          dangerouslyUseHTMLString: true
+        })
+      })
+    }
+  },
+  mounted () {
+    this.openPasswordModal()
   }
 }
 </script>
